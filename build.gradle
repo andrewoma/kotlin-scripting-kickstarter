@@ -1,0 +1,50 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:0.7.271'
+  }
+}
+
+apply plugin: "kotlin"
+
+compileKotlin {
+//    kotlinOptions.annotations = file('annotations')
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile 'org.jetbrains.kotlin:kotlin-stdlib:0.7.271'
+  compile 'org.jfree:jfreechart:1.0.17'
+  compile 'args4j:args4j:2.0.26'
+  testCompile 'junit:junit:4.11'
+}
+
+sourceSets {
+    main {
+        kotlin {
+            srcDir 'kotlin'
+        }
+    }
+    test {
+        kotlin {
+            srcDir 'test/kotlin'
+        }
+        resources {
+            srcDir 'test/resources'
+        }
+    }
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = "1.11"
+}
+
+task copyToLib(type: Copy) {
+  into "lib"
+  from configurations.runtime
+}
