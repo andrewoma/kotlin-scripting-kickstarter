@@ -2,8 +2,7 @@
 
 Kotlin Scripting Kickstarter demonstrates how Kotlin can be used as a scripting language.
 
-Development of scripts can be done in IntelliJ using any libraries maven repositories have to offer
-- all in a clean, isolated environment.
+Development of scripts can be done in IntelliJ using any libraries maven repositories have to offer - all in a clean, isolated environment.
 
 #### Quick Start
 
