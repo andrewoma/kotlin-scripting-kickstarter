@@ -4,9 +4,9 @@
 ##############################################################################
 
 DEBUG=0
-RUNNER=$0
+RUNNER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SCRIPT=$1
-HOME=`cd $RUNNER/../../; pwd -P`
+HOME=`cd $RUNNER/../; pwd -P`
 CLASSES="$HOME/build/kotlin-classes/main"
 PACKAGE=`grep '^package ' "$1" | awk -F'[\t ;]' '{print $2}'`
 MAIN=`echo "$PACKAGE" | awk -F'.' '{print $NF}'`
