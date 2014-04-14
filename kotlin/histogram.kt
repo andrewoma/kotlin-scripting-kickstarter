@@ -74,7 +74,11 @@ fun generateChart(data: DoubleArray): JFreeChart {
 
 fun prepareData(): DoubleArray {
     val reader = BufferedReader(if (config.input == null) InputStreamReader(System.`in`) else FileReader(config.input))
-    val sorted = reader.lines()!!.map { BigDecimal(it).doubleValue() }.toSortedList()
+    // Workaround: http://youtrack.jetbrains.com/issue/KT-4761
+    // val sorted = reader.lines().map { BigDecimal(it).doubleValue() }.toSortedList()
+    val list = arrayListOf<Double>()
+    reader.forEachLine{ list.add(BigDecimal(it).doubleValue()) }
+    val sorted = list.sort()
     val start = sorted.size * config.minPercentile / 100
     val end = sorted.size * config.maxPercentile / 100
     if (end <= start) return DoubleArray(0) // Data set must be tiny
