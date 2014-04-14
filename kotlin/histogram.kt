@@ -74,7 +74,7 @@ fun generateChart(data: DoubleArray): JFreeChart {
 
 fun prepareData(): DoubleArray {
     val reader = BufferedReader(if (config.input == null) InputStreamReader(System.`in`) else FileReader(config.input))
-    val sorted = reader.lines().map { BigDecimal(it).doubleValue() }.toSortedList()
+    val sorted = reader.lines()!!.map { BigDecimal(it).doubleValue() }.toSortedList()
     val start = sorted.size * config.minPercentile / 100
     val end = sorted.size * config.maxPercentile / 100
     if (end <= start) return DoubleArray(0) // Data set must be tiny

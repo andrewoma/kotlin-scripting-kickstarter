@@ -17,3 +17,5 @@ All you need to get going is a JDK installed, a unix-ish environment and an inte
 
 #### License
 This project is licensed under a MIT license.
+
+[![Build Status](https://travis-ci.org/andrewoma/kotlin-scripting-kickstarter.svg?branch=master)](https://travis-ci.org/andrewoma/kotlin-scripting-kickstarter)
