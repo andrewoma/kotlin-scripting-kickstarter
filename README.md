@@ -20,7 +20,7 @@ All you need to get going is a JDK installed and a unix-ish environment.
 ```shell
 $ git clone https://github.com/andrewoma/kotlin-scripting-kickstarter kotlin-scripts
 $ cd kotlin-scripts/
-$ ./gradlew check
+$ ./gradlew check copyToLib
 $ export PATH=$PATH:`pwd`/kotlin
 $ helloworld.kt
 $ vi `which helloworld.kt` # Make some changes
