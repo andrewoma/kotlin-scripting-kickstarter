@@ -47,6 +47,21 @@ See [histogram.kt](/kotlin/histogram.kt) for a sample script that generates a ch
 * Scripts must be declared in their own unique package or the `main` method will conflict with other scripts.
 * The gradle koltin plugin seems to require that kotlin sources live in a directory called `kotlin`  
 
+#### Stuck behind an authenticating proxy?
+
+Both `git` and `gradle` need to be configured to work via a proxy. 
+
+For `git`, add the following to `~/.gitconfig `:
+```
+[http]
+	proxy = http://<user>:<password>@<proxy_host>:<proxy_port>
+```
+
+For `gradle`, the following seems to work with both `gradle` and `gradlew`:
+```
+export GRADLE_OPTS='-Dhttp.proxyHost=<proxy_host> -Dhttp.proxyPort=<proxy_port> -Dhttp.proxyUser=<user> -Dhttp.proxyPassword=<password>'
+```
+
 #### Alternatives
 [kotlin-script](https://github.com/andrewoma/kotlin-script) provides traditional scripting support for Kotlin. The main advantage of the kickstarter approach is that supports full IDE development.
 
