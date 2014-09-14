@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/kotlin-scripts.iml" filepath="$PROJECT_DIR$/kotlin-scripts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kotlin-scripting-kickstarter.iml" filepath="$PROJECT_DIR$/kotlin-scripting-kickstarter.iml" />
     </modules>
   </component>
 </project>
