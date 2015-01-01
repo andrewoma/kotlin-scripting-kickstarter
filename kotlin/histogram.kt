@@ -18,7 +18,7 @@ import org.jfree.chart.ChartUtilities
 
 val script = File(System.getProperty("kotlin.script.file")!!)
 
-object config {
+class Config {
     Option(name = "-output", required = true, metaVar = "<output>", usage = "Output file for the generated histogram")
     val output = ""
 
@@ -52,12 +52,13 @@ object config {
         "maxPercentile=$maxPercentile, width=$width, height=$height, bins=$bins, label=$label)"
     }
 }
+val config = Config()
 
 fun generateHistogram() {
     validateConfig()
     val data = prepareData()
     val chart = generateChart(data)
-    ChartUtilities.saveChartAsJPEG(File(config.output), chart, config.width, config.height)
+    ChartUtilities.saveChartAsPNG(File(config.output), chart, config.width, config.height)
 }
 
 fun generateChart(data: DoubleArray): JFreeChart {
@@ -66,7 +67,7 @@ fun generateChart(data: DoubleArray): JFreeChart {
     dataset.addSeries(config.label, data, config.bins)
 
     val chart = ChartFactory.createHistogram(config.title, null, null, dataset, PlotOrientation.VERTICAL, true,
-            false, false)!!;
+            false, false)!!
 
     chart.getXYPlot()?.setForegroundAlpha(0.75f);
     return chart
@@ -75,8 +76,8 @@ fun generateChart(data: DoubleArray): JFreeChart {
 fun prepareData(): DoubleArray {
     val reader = BufferedReader(if (config.input == null) InputStreamReader(System.`in`) else FileReader(config.input))
     val sorted = reader.useLines { it.map { BigDecimal(it).doubleValue() }.toSortedList() }
-    val start = sorted.size * config.minPercentile / 100
-    val end = sorted.size * config.maxPercentile / 100
+    val start = sorted.size() * config.minPercentile / 100
+    val end = sorted.size() * config.maxPercentile / 100
     if (end <= start) return DoubleArray(0) // Data set must be tiny
 
     // Some manual fun as JFreeChart seems to require an array instead of a List

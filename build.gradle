@@ -1,27 +1,29 @@
 buildscript {
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:0.8.11'
-  }
+    ext {
+        kotlinVersion = '0.10.195'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
 }
 
 apply plugin: "kotlin"
 
 compileKotlin {
-//    kotlinOptions.annotations = file('annotations')
 }
 
 repositories {
-  mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-  compile 'org.jetbrains.kotlin:kotlin-stdlib:0.8.11'
-  compile 'org.jfree:jfreechart:1.0.17'
-  compile 'args4j:args4j:2.0.26'
-  testCompile 'junit:junit:4.11'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    compile 'org.jfree:jfreechart:1.0.17'
+    compile 'args4j:args4j:2.0.26'
+    testCompile 'junit:junit:4.11'
 }
 
 sourceSets {
@@ -41,10 +43,10 @@ sourceSets {
 }
 
 task wrapper(type: Wrapper) {
-  gradleVersion = "1.11"
+    gradleVersion = "2.2.1"
 }
 
 task copyToLib(type: Copy) {
-  into "lib"
-  from configurations.runtime
+    into "lib"
+    from configurations.runtime
 }
