@@ -13,7 +13,7 @@ class HistogramTest : TestBase() {
         val output = File.createTempFile("histogram", ".png")
         output.deleteOnExit()
 
-        main(array("-input", file("/test/resources/histogram-sample.txt").path,
+        main(arrayOf("-input", file("/test/resources/histogram-sample.txt").path,
                 "-label", "Response (s)", "-title", "Web Server Response Times", "-output", output.path))
         assertTrue(output.exists())
     }
