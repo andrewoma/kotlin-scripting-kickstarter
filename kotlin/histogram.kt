@@ -19,32 +19,32 @@ import org.jfree.chart.ChartUtilities
 val script = File(System.getProperty("kotlin.script.file")!!)
 
 class Config {
-    Option(name = "-output", required = true, metaVar = "<output>", usage = "Output file for the generated histogram")
+    @Option(name = "-output", required = true, metaVar = "<output>", usage = "Output file for the generated histogram")
     val output = ""
 
-    Option(name = "-input", metaVar = "<input>", usage = "Input file. If not specified stdin is assumed. "
+    @Option(name = "-input", metaVar = "<input>", usage = "Input file. If not specified stdin is assumed. "
     + "Input is expected to be a sequence of numeric values, one per line.")
     val input: String? = null
 
-    Option(name = "-title", metaVar = "<title>", usage = "Histogram title")
+    @Option(name = "-title", metaVar = "<title>", usage = "Histogram title")
     val title: String? = null
 
-    Option(name = "-min", metaVar = "<percentile>", usage = "Minium percentile to include in the chart. Defaults to 5")
+    @Option(name = "-min", metaVar = "<percentile>", usage = "Minium percentile to include in the chart. Defaults to 5")
     val minPercentile = 5
 
-    Option(name = "-max", metaVar = "<percentile>", usage = "Maximum percentile to include in the chart. Defaults to 95")
+    @Option(name = "-max", metaVar = "<percentile>", usage = "Maximum percentile to include in the chart. Defaults to 95")
     val maxPercentile = 95
 
-    Option(name = "-width", metaVar = "<width>", usage = "Width of the generated histogram. Defaults to 600px")
+    @Option(name = "-width", metaVar = "<width>", usage = "Width of the generated histogram. Defaults to 600px")
     val width = 600
 
-    Option(name = "-height", metaVar = "<height>", usage = "Height of the generated histogram. Defaults to 400px")
+    @Option(name = "-height", metaVar = "<height>", usage = "Height of the generated histogram. Defaults to 400px")
     val height = 400
 
-    Option(name = "-bins", metaVar = "<bins>", usage = "Number of bins in the histogram. Defaults to 50.")
+    @Option(name = "-bins", metaVar = "<bins>", usage = "Number of bins in the histogram. Defaults to 50.")
     val bins = 50
 
-    Option(name = "-label", metaVar = "<label>", required = true, usage = "Label for the data.")
+    @Option(name = "-label", metaVar = "<label>", required = true, usage = "Label for the data.")
     val label = ""
 
     override fun toString(): String {
@@ -63,19 +63,19 @@ fun generateHistogram() {
 
 fun generateChart(data: DoubleArray): JFreeChart {
     val dataset = HistogramDataset()
-    dataset.setType(HistogramType.RELATIVE_FREQUENCY)
+    dataset.type = HistogramType.RELATIVE_FREQUENCY
     dataset.addSeries(config.label, data, config.bins)
 
     val chart = ChartFactory.createHistogram(config.title, null, null, dataset, PlotOrientation.VERTICAL, true,
             false, false)!!
 
-    chart.getXYPlot()?.setForegroundAlpha(0.75f);
+    chart.xyPlot?.foregroundAlpha = 0.75f;
     return chart
 }
 
 fun prepareData(): DoubleArray {
     val reader = BufferedReader(if (config.input == null) InputStreamReader(System.`in`) else FileReader(config.input))
-    val sorted = reader.useLines { it.map { BigDecimal(it).doubleValue() }.toList().toSortedList() }
+    val sorted = reader.useLines { it.map { BigDecimal(it).doubleValue() }.toList().sorted() }
     val start = sorted.size() * config.minPercentile / 100
     val end = sorted.size() * config.maxPercentile / 100
     if (end <= start) return DoubleArray(0) // Data set must be tiny
@@ -90,12 +90,11 @@ fun prepareData(): DoubleArray {
 }
 
 fun validateConfig() {
-    require(config.input == null || File(config.input).exists() && File(config.input).canRead(),
-            "Input file '${config.input} does not exist or can't be read")
+    require(config.input == null || File(config.input).exists() && File(config.input).canRead()) { "Input file '${config.input} does not exist or can't be read" }
 
-    require(config.minPercentile in 0..100, "Min percentile must be between 0 and 100 inclusive")
-    require(config.maxPercentile in 0..100, "Max percentile must be between 0 and 100 inclusive")
-    require(config.minPercentile < config.maxPercentile, "Min percentile must be < max percentile")
+    require(config.minPercentile in 0..100) { "Min percentile must be between 0 and 100 inclusive" }
+    require(config.maxPercentile in 0..100) { "Max percentile must be between 0 and 100 inclusive" }
+    require(config.minPercentile < config.maxPercentile) { "Min percentile must be < max percentile" }
 }
 
 fun err(message: String) = System.err.println(message)

@@ -7,7 +7,7 @@ import scripts.base.TestBase
 import kotlin.test.fail
 
 class HistogramTest : TestBase() {
-    test fun generateHistogram() {
+    @test fun generateHistogram() {
         System.setProperty("kotlin.script.file", file("/kotlin/histogram.kt").path)
 
         val output = File.createTempFile("histogram", ".png")
