@@ -1,13 +1,12 @@
 package scripts.histogram
 
-import org.junit.Test as test
+import org.junit.Test
 import java.io.File
 import kotlin.test.assertTrue
 import scripts.base.TestBase
-import kotlin.test.fail
 
 class HistogramTest : TestBase() {
-    @test fun generateHistogram() {
+    @Test fun generateHistogram() {
         System.setProperty("kotlin.script.file", file("/kotlin/histogram.kt").path)
 
         val output = File.createTempFile("histogram", ".png")
