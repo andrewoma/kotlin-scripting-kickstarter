@@ -75,9 +75,9 @@ fun generateChart(data: DoubleArray): JFreeChart {
 
 fun prepareData(): DoubleArray {
     val reader = BufferedReader(if (config.input == null) InputStreamReader(System.`in`) else FileReader(config.input))
-    val sorted = reader.useLines { it.map { BigDecimal(it).doubleValue() }.toList().sorted() }
-    val start = sorted.size() * config.minPercentile / 100
-    val end = sorted.size() * config.maxPercentile / 100
+    val sorted = reader.useLines { it.map { BigDecimal(it).toDouble() }.toList().sorted() }
+    val start = sorted.size * config.minPercentile / 100
+    val end = sorted.size * config.maxPercentile / 100
     if (end <= start) return DoubleArray(0) // Data set must be tiny
 
     // Some manual fun as JFreeChart seems to require an array instead of a List
@@ -106,14 +106,14 @@ fun main(args: Array<String>) {
         parser.parseArgument(args.toList())
         generateHistogram()
     } catch (e: CmdLineException) {
-        err("Error: ${e.getMessage()}\n")
+        err("Error: ${e.message}\n")
         err("${script.name} generates a histogram chart for a sequence of numbers\n")
         err("Usage: ${script.name} <options>")
         parser.printUsage(System.err)
         err("\nExample: ${script.name} -input data.txt -output responses.png -label 'Response (s)' -bins 100")
         System.exit(1)
     } catch (e: IllegalArgumentException) {
-        err("Error: ${e.getMessage()}\n")
+        err("Error: ${e.message}\n")
         System.exit(1)
     }
 }
