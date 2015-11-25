@@ -11,7 +11,7 @@ CLASSES="$HOME/build/kotlin-classes/main"
 PACKAGE=`grep '^package ' "$1" | awk -F'[\t ;]' '{print $2}'`
 MAIN=`echo "$PACKAGE" | awk -F'.' '{print $NF}'`
 MAIN="$(tr '[:lower:]' '[:upper:]' <<< ${MAIN:0:1})${MAIN:1}"
-MAIN="$PACKAGE.${MAIN}Package"
+MAIN="$PACKAGE.${MAIN}Kt"
 COMPILED=`echo "$MAIN" | sed 's/\./\//g'`
 COMPILED="$CLASSES/$COMPILED.class"
 
