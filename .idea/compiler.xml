@@ -18,6 +18,9 @@
         <processorPath useClasspath="true" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="kotlin-scripting-kickstarter_main" target="1.8" />
+      <module name="kotlin-scripting-kickstarter_test" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
-

@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/kotlin-scripting-kickstarter.iml" filepath="$PROJECT_DIR$/kotlin-scripting-kickstarter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-scripting-kickstarter.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-scripting-kickstarter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-scripting-kickstarter_main.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-scripting-kickstarter_main.iml" group="kotlin-scripting-kickstarter" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-scripting-kickstarter_test.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-scripting-kickstarter_test.iml" group="kotlin-scripting-kickstarter" />
     </modules>
   </component>
 </project>
-
