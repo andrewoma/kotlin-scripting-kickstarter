@@ -69,7 +69,7 @@ fun generateChart(data: DoubleArray): JFreeChart {
     val chart = ChartFactory.createHistogram(config.title, null, null, dataset, PlotOrientation.VERTICAL, true,
             false, false)!!
 
-    chart.xyPlot?.foregroundAlpha = 0.75f;
+    chart.xyPlot?.foregroundAlpha = 0.75f
     return chart
 }
 
@@ -82,7 +82,7 @@ fun prepareData(): DoubleArray {
 
     // Some manual fun as JFreeChart seems to require an array instead of a List
     val data = DoubleArray(end - start)
-    var to = 0;
+    var to = 0
     for (from in start..end - 1) {
         data[to++] = sorted[from]
     }
