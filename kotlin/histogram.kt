@@ -1,4 +1,5 @@
 #!/usr/bin/env kotlin-script.sh
+@file:Suppress("PackageDirectoryMismatch")
 package scripts.histogram
 
 import org.kohsuke.args4j.Option
